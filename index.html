@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodCircle - Reduce Food Waste</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="brand">FoodCircle</a>
+            <div class="nav-links">
+                <a href="#list-food">List Food</a>
+                <a href="#find-food">Find Food</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact Us</a> <!-- This links to the Contact Us section -->
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Hero Section with Animated Background -->
+    <section class="section hero">
+        <div class="hero-overlay">
+            <h1 style="margin-bottom: 30px;">Reduce Food Waste Through Community Sharing</h1>
+            <p>Join us in making a difference by sharing surplus food with your neighbors.</p>
+            <a href="#list-food" class="btn">List Your Food</a>
+        </div>
+    </section>
+
+<!-- Listing Section -->
+<section id="list-food" class="section section1">
+    <h2 style="margin-bottom: 80px;">List Surplus Food</h2>
+    <form id="foodForm" class="rounded-form">
+        <div class="form-group">
+            <input type="text" id="foodName" placeholder="Food Name" required>
+            <input type="text" id="location" placeholder="Your Location" required>
+            <input type="date" id="expiryDate" placeholder="Expiry Date" required>
+        </div>
+        <button type="submit" class="btn">Submit</button>
+    </form>
+</section>
+
+<script>
+document.getElementById('foodForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const foodName = document.getElementById('foodName').value;
+    const location = document.getElementById('location').value;
+    const expiryDate = document.getElementById('expiryDate').value;
+
+    const data = {
+        fields: {
+            FoodName: foodName,
+            Location: location,
+            ExpiryDate: expiryDate
+        }
+    };
+
+    fetch('https://api.airtable.com/v0/appb9uvHgsni3Jc4k/Food', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer patQBcQaB7uyucTHk.9617076bff5f0f0cc0af2452430af03b62749b1f02914d875d8e2cc2000b55df',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        alert('Form submitted successfully!');
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        alert('An error occurred.');
+    });
+});
+</script>
+
+    
+
+    <!-- Community Impact Section -->
+    <section class="section community-impact" style="background-color: rgb(251, 252, 252);">
+        <h2>Our Community Impact</h2>
+        <p>Together, we have saved over 10,000 pounds of food from being wasted!</p>
+    </section>
+
+    <!-- Featured Listings Section -->
+    <section id="find-food" class="section section2">
+        <h2>Find Surplus Food Near You</h2>
+        <div class="cards-container">
+            <div class="card">
+                <img src="f1.avif" alt="Food Item">
+                <div class="card-content">
+                    <h3>Fresh Vegetables</h3>
+                    <p>Location: Central Park</p>
+                    <button class="btn card-btn">More Info</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="f2.jpg" alt="Food Item">
+                <div class="card-content">
+                    <h3>Baked Goods</h3>
+                    <p>Location: Downtown Bakery</p>
+                    <button class="btn card-btn">More Info</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="f3.jpg" alt="Food Item">
+                <div class="card-content">
+                    <h3>Baked Goods</h3>
+                    <p>Location: Downtown Bakery</p>
+                    <button class="btn card-btn">More Info</button>
+                </div>
+            </div>
+            <!-- More cards here -->
+        </div>
+    </section>
+
+    <!-- Testimonials Slider -->
+    <section id="testimonials" class="section section4">
+        <h2>What Our Users Say</h2>
+        <div class="slider">
+            <div class="testimonial">
+                <p>"FoodCircle helped me share extra food with those in need. It’s easy and effective!"</p>
+                <h4>- Jane Doe</h4>
+            </div>
+            <div class="testimonial">
+                <p>"A wonderful initiative that brings people together to fight food waste."</p>
+                <h4>- John Smith</h4>
+            </div>
+            <div class="testimonial">
+                <p>"A wonderful initiative that brings people together to fight food waste."</p>
+                <h4>- John Smith</h4>
+            </div>
+            <div class="testimonial">
+                <p>"A wonderful initiative that brings people together to fight food waste."</p>
+                <h4>- John Smith</h4>
+            </div>
+            <div class="testimonial">
+                <p>"A wonderful initiative that brings people together to fight food waste."</p>
+                <h4>- John Smith</h4>
+            </div>
+            <!-- More testimonials here -->
+        </div>
+    </section>
+<!-- Contact Us Section -->
+<section id="contact" class="contact-us">
+    <h2>Contact Us</h2>
+    <div class="contact-us-content">
+      <!-- Left Side: Picture -->
+      <div class="contact-image">
+        <img src="f2.jpg" alt="Contact Us">
+      </div>
+      
+      <section id="contact" class="section">
+        <!-- Right Side: Form -->
+        <div class="contact-form-container">
+          <form id="contactForm" class="contact-form"> <!-- Corrected form ID -->
+            <div class="form-group-contact">
+              <input type="text" id="contactName" placeholder="Your Name" required>
+            </div>
+            <div class="form-group-contact">
+              <input type="email" id="contactEmail" placeholder="Your Email" required>
+            </div>
+            <div class="form-group-contact">
+              <textarea id="contactMessage" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn-contact">Send Message</button>
+          </form>
+        </div>
+      </section>
+  </section>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form from reloading the page
+      
+      // Get the values from the form fields
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const message = document.getElementById('contactMessage').value;
+    
+      // Airtable API URL for the "Contact" table in your "foodCircle" base
+      const airtableUrl = 'https://api.airtable.com/v0/appb9uvHgsni3Jc4k/Contact';
+    
+      // Send a POST request to Airtable
+      fetch(airtableUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer patQBcQaB7uyucTHk.9617076bff5f0f0cc0af2452430af03b62749b1f02914d875d8e2cc2000b55df',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fields: {
+            Name: name,
+            Email: email,
+            Message: message
+          }
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          console.error('Error:', data.error.message);
+          alert('There was an error submitting your message.');
+        } else {
+          console.log('Success:', data);
+          alert('Your message has been sent successfully!');
+          document.getElementById('contactForm').reset();
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to send message. Please try again.');
+      });
+    });
+    </script>
+    
+    
+  
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 FoodCircle. All rights reserved.</p>
+            <div class="social-media">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+</body>
+</html>
